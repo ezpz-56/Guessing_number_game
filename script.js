@@ -15,9 +15,12 @@ const guessEl = document.querySelector('.guess');
 
 const checkBtn = document.querySelector('.check');
 
+const againaBtn = document.querySelector('.again');
+
 const number = Math.trunc(Math.random() * 20 + 1);
+
 let score = 20;
-numberEl.textContent = number;
+
 checkBtn.addEventListener('click', function () {
   const guess = Number(guessEl.value);
 
@@ -29,10 +32,12 @@ checkBtn.addEventListener('click', function () {
   } else if (guess === number) {
     messageEl.textContent = 'Correct Number!  🥳';
     document.body.style.backgroundColor = '#60b347'; //adding CSS properties
+    numberEl.textContent = number;
     numberEl.style.width = '30rem';
 
     //When player guesses high
   } else if (guess > number) {
+    console.log(guess);
     if (score > 1) {
       messageEl.textContent = 'Too High! 📈';
       score--;
@@ -44,6 +49,7 @@ checkBtn.addEventListener('click', function () {
 
     //When player guesses low
   } else if (guess < number) {
+    console.log(guess);
     if (score > 1) {
       messageEl.textContent = 'Too low! 📉';
       score--;
@@ -53,4 +59,21 @@ checkBtn.addEventListener('click', function () {
       messageEl.textContent = 'You lost the game 😭';
     }
   }
+});
+
+againaBtn.addEventListener('click', function () {
+  score = 20;
+  numberEl.style = `  background: #eee;
+  color: #333;
+  font-size: 6rem;
+  width: 15rem;
+  padding: 3rem 0rem;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  `;
+  guessEl.value = '';
+  messageEl.textContent = 'Start guessing...';
 });
